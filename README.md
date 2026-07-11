@@ -1,1 +1,1 @@
-[![Anurag's GitHub stats](https://github-stats-extended.vercel.app/api?username=Acetylsalicylate)](https://github.com/stats-organization/github-stats-extended) ![Rei](gif/Plush Rei.gif)
+[![Anurag's GitHub stats](https://github-stats-extended.vercel.app/api?username=Acetylsalicylate)](https://github.com/stats-organization/github-stats-extended) <img src="[ссылка_на_гифку.gif](https://i.pinimg.com/originals/ee/8d/45/ee8d450c72f550b34ec2a598ec862d82.gif)" width="300" alt="Rei">
