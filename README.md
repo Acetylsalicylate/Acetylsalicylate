@@ -1,1 +1,1 @@
-[![Anurag's GitHub stats](https://github-stats-extended.vercel.app/api?username=Acetylsalicylate)](https://github.com/stats-organization/github-stats-extended) <img width="640" height="640" alt="Image" src="https://github.com/user-attachments/assets/3f73ca4c-0395-490b-a22f-e300c823fb20" />
+[![Anurag's GitHub stats](https://github-stats-extended.vercel.app/api?username=Acetylsalicylate)](https://github.com/stats-organization/github-stats-extended) <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/3f73ca4c-0395-490b-a22f-e300c823fb20" />
