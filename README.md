@@ -3,4 +3,5 @@
 
 [For therapist and in-game purchases for War Thunder](https://patreon.com/acetylsalicylate?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink) (You can consider yourself an investor in education.)
 
-Creator of the most profoundly unprofitable B2B AI SaaS startups. The ultimate LARPer—of all Rus', the entire world, and beyond.
+Creator of the most profoundly unprofitable B2B AI SaaS startups. The ultimate LARPer—of all Rus', the entire world, and beyond.  
+自分が蝶の夢を見ているのか、それとも蝶が私の夢を見ているのか、結局最後までわからなかった。。。
