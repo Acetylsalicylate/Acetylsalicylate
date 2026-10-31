@@ -2,8 +2,8 @@ name: Update README cards
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs once daily at midnight
-  workflow_dispatch:
+    - cron: "0 0 * * *" # Запуск ежедневно в полночь (можете изменить на "0 */6 * * *" для обновления каждые 6 часов)
+  workflow_dispatch:     # Позволяет запускать вручную из вкладки Actions
 
 jobs:
   build:
@@ -15,14 +15,25 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      # 1. Генерация основной карточки статистики
       - name: Generate stats card
         uses: stats-organization/github-readme-stats-action@v2
         with:
           card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true
+          options: username=Acetylsalicylate&rank_icon=github&show_icons=true&include_all_commits=true
           path: profile/stats.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # 2. Генерация карточки языков
+      - name: Generate top-langs card
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: top-langs
+          options: username=Acetylsalicylate&layout=compact&langs_count=4
+          path: profile/top-langs.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 3. Фиксация и отправка изменений в репозиторий
       - name: Commit cards
         run: |
           git config user.name "github-actions[bot]"
