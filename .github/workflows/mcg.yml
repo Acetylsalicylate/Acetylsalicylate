@@ -1,0 +1,33 @@
+name: Generate SVG Card
+
+on:
+  push:
+    paths:
+      - 'card-data.json'
+      - 'generate.js'
+      - 'assets/**'
+  workflow_dispatch: # Позволяет запустить генерацию вручную из вкладки Actions
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Generate card.svg
+        run: node generate.js
+
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update Spotify card SVG"
+          file_pattern: card.svg
