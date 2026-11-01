@@ -20,7 +20,7 @@
                             aspect-ratio: 1/1;
                             background-size: cover;
                             background-position: center;
-                            background-image: url('https://upload.wikimedia.org/wikipedia/ru/3/36/LifeIsKilling.jpg?utm_source=ru.wikipedia.org&utm_campaign=index&utm_content=original');
+                            background-image: url('https://raw.githubusercontent.com/Acetylsalicylate/Acetylsalicylate/main/covers/likm.jpg');
                         }
 
                         .card-body {
