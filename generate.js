@@ -1,8 +1,33 @@
 const fs = require('fs');
 const path = require('path');
-const data = require('./card-data.json');
 
-const Card = ({ title, artist, image, url }) => {
+const dataPath = path.join(__dirname, 'card-data.json');
+
+if (!fs.existsSync(dataPath)) {
+    console.error('Error: card-data.json not found!');
+    process.exit(1);
+}
+
+const data = require(dataPath);
+
+// Читаем локальную картинку и конвертируем в Base64
+let imageStyle = "url('')";
+try {
+    const imagePath = path.join(__dirname, data.imagePath || 'assets/cover.jpg');
+    if (fs.existsSync(imagePath)) {
+        const imageBuffer = fs.readFileSync(imagePath);
+        const ext = path.extname(imagePath).replace('.', '').toLowerCase();
+        const mimeType = ext === 'png' ? 'image/png' : 'image/jpeg';
+        const base64Data = imageBuffer.toString('base64');
+        imageStyle = `url('data:${mimeType};base64,${base64Data}')`;
+    } else {
+        console.warn('Warning: Image file not found at', imagePath);
+    }
+} catch (e) {
+    console.error('Error processing image:', e);
+}
+
+const Card = ({ title, artist, url }) => {
     return `
         <svg fill="none" width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
             <foreignObject width="100%" height="100%">
@@ -26,7 +51,7 @@ const Card = ({ title, artist, image, url }) => {
                             aspect-ratio: 1/1;
                             background-size: cover;
                             background-position: center;
-                            background-image: ${image};
+                            background-image: ${imageStyle};
                         }
 
                         .card-body {
@@ -90,7 +115,6 @@ const Card = ({ title, artist, image, url }) => {
     `;
 };
 
-// Записываем результат в card.svg
 const svgContent = Card(data);
 fs.writeFileSync(path.join(__dirname, 'card.svg'), svgContent.trim());
-console.log('card.svg generated successfully!');
+console.log('card.svg generated successfully with embedded Base64 image!');
