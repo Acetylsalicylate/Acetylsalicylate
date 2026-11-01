@@ -6,7 +6,7 @@ on:
       - 'card-data.json'
       - 'generate.js'
       - 'assets/**'
-  workflow_dispatch: # Позволяет запустить генерацию вручную из вкладки Actions
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -29,5 +29,7 @@ jobs:
       - name: Commit and push if changed
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-update Spotify card SVG"
+          commit_message: "Auto-update Spotify card SVG with Base64 image"
           file_pattern: card.svg
+          commit_user_name: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com>"
