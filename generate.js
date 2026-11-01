@@ -29,7 +29,7 @@ try {
 
 const Card = ({ title, artist, url }) => {
     return `
-        <svg fill="none" width="500" height="150" viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+        <svg fill="none" width="362" height="140" viewBox="0 0 362 140" xmlns="http://www.w3.org/2000/svg">
             <foreignObject width="100%" height="100%">
                 <div xmlns="http://www.w3.org/1999/xhtml">
                     <style>
@@ -41,8 +41,8 @@ const Card = ({ title, artist, url }) => {
 
                         .card {
                             display: flex;
-                            width: 500px;
-                            height: 150px;
+                            width: 362px;
+                            height: 140px;
                             text-decoration: none;
                             background-color: #ffffff;
                             border-radius: 12px;
@@ -64,7 +64,7 @@ const Card = ({ title, artist, url }) => {
                             flex-direction: column;
                             justify-content: center;
                             background-color: #ffffff;
-                            width: calc(500px - 150px);
+                            width: calc(362px - 140px);
                         }
 
                         .recently-played-title {
