@@ -41,30 +41,35 @@ const Card = ({ title, artist, url }) => {
 
                         .card {
                             display: flex;
+                            align-items: center;
                             width: 362px;
                             height: 140px;
                             text-decoration: none;
                             background-color: #ffffff;
-                            border-radius: 12px;
+                            border-radius: 6px;
                             overflow: hidden;
                         }
 
                         .album-image {
-                            height: 100%;
-                            aspect-ratio: 1/1;
+                            width: 126px;
+                            height: 126px;
+                            margin-left: 6px;
+                            border-radius: 5px;
                             background-size: cover;
                             background-position: center;
                             background-image: ${imageStyle};
+                            flex-shrink: 0;
                         }
 
                         .card-body {
                             display: flex;
                             color: #121212;
-                            padding: 0 24px;
+                            padding: 0 20px;
                             flex-direction: column;
                             justify-content: center;
                             background-color: #ffffff;
-                            width: calc(362px - 140px);
+                            flex: 1;
+                            overflow: hidden;
                         }
 
                         .recently-played-title {
@@ -78,7 +83,7 @@ const Card = ({ title, artist, url }) => {
                         }
 
                         .title-track {
-                            max-width: 300px;
+                            max-width: 100%;
                             font-size: 1.3rem;
                             overflow: hidden;
                             font-weight: bolder;
@@ -90,7 +95,7 @@ const Card = ({ title, artist, url }) => {
                         }
 
                         .artist-track {
-                            max-width: 300px;
+                            max-width: 100%;
                             color: #666666;
                             font-size: 0.7rem;
                             overflow: hidden;
@@ -122,4 +127,4 @@ const Card = ({ title, artist, url }) => {
 
 const svgContent = Card(data);
 fs.writeFileSync(path.join(__dirname, 'card.svg'), svgContent.trim());
-console.log('card.svg generated successfully with white background and rounded corners!');
+console.log('card.svg generated successfully with rounded image corners!');
