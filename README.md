@@ -5,5 +5,5 @@
 
 # I am リョヴァ🌸
 
-Creator of the most profoundly unprofitable B2B AI SaaS startups. The ultimate LARPer — of all Rus', the entire world, and beyond.  
+Creator of the most profoundly unprofitable B2B AI SaaS startups. The ultimate LARPer – of all Rus', the entire world, and beyond.  
 自分が蝶の夢を見とるのか、それとも蝶が僕の夢を見とるのか、結局最後までわかへんかった。。。
