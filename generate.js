@@ -44,6 +44,9 @@ const Card = ({ title, artist, url }) => {
                             width: 500px;
                             height: 150px;
                             text-decoration: none;
+                            background-color: #ffffff;
+                            border-radius: 12px;
+                            overflow: hidden;
                         }
 
                         .album-image {
@@ -56,11 +59,11 @@ const Card = ({ title, artist, url }) => {
 
                         .card-body {
                             display: flex;
-                            color: white;
+                            color: #121212;
                             padding: 0 24px;
                             flex-direction: column;
                             justify-content: center;
-                            background-color: #121212;
+                            background-color: #ffffff;
                             width: calc(500px - 150px);
                         }
 
@@ -71,6 +74,7 @@ const Card = ({ title, artist, url }) => {
                             font-size: 0.7rem;
                             background-color: #00cf74;
                             margin: 0 0 8px 0;
+                            border-radius: 4px;
                         }
 
                         .title-track {
@@ -82,11 +86,12 @@ const Card = ({ title, artist, url }) => {
                             text-overflow: ellipsis;
                             font-family: Arial Black, sans-serif;
                             margin: 0 0 4px 0;
+                            color: #121212;
                         }
 
                         .artist-track {
                             max-width: 300px;
-                            opacity: 0.7;
+                            color: #666666;
                             font-size: 0.7rem;
                             overflow: hidden;
                             white-space: nowrap;
@@ -117,4 +122,4 @@ const Card = ({ title, artist, url }) => {
 
 const svgContent = Card(data);
 fs.writeFileSync(path.join(__dirname, 'card.svg'), svgContent.trim());
-console.log('card.svg generated successfully with embedded Base64 image!');
+console.log('card.svg generated successfully with white background and rounded corners!');
