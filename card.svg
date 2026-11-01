@@ -20,7 +20,7 @@
                             aspect-ratio: 1/1;
                             background-size: cover;
                             background-position: center;
-                            background-image: url('https://cdn.jsdelivr.net/gh/Acetylsalicylate/Acetylsalicylate@main/covers/likm.jpg');
+                            background-image: undefined;
                         }
 
                         .card-body {
