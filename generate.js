@@ -10,23 +10,96 @@ if (!fs.existsSync(dataPath)) {
 
 const data = require(dataPath);
 
+const MIME_TYPES = {
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.webp': 'image/webp',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml'
+};
+
+const PREFERRED_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
+function findImageByBaseName(rawImagePath) {
+    const target = rawImagePath || path.join('assets', 'cover');
+    const resolvedTarget = path.isAbsolute(target)
+        ? target
+        : path.join(__dirname, target);
+
+    const dir = path.dirname(resolvedTarget);
+    const baseName = path.basename(resolvedTarget, path.extname(resolvedTarget)).toLowerCase();
+
+    if (!fs.existsSync(dir)) {
+        return null;
+    }
+
+    const files = fs.readdirSync(dir, { withFileTypes: true })
+        .filter((entry) => entry.isFile())
+        .map((entry) => entry.name);
+
+    // Сначала ищем по приоритетным расширениям
+    for (const ext of PREFERRED_EXTS) {
+        const match = files.find(
+            (file) =>
+                path.basename(file, path.extname(file)).toLowerCase() === baseName &&
+                path.extname(file).toLowerCase() === ext
+        );
+        if (match) {
+            return path.join(dir, match);
+        }
+    }
+
+    // Затем по любому другому расширению с тем же именем
+    const anyMatch = files.find(
+        (file) => path.basename(file, path.extname(file)).toLowerCase() === baseName
+    );
+    return anyMatch ? path.join(dir, anyMatch) : null;
+}
+
+// Ищем картинку по названию независимо от расширения и конвертируем в Base64
 let imageStyle = "url('')";
 try {
-    const imagePath = path.join(__dirname, data.imagePath || 'assets/cover.jpg');
-    if (fs.existsSync(imagePath)) {
+    const imagePath = findImageByBaseName(data.imagePath);
+    if (imagePath && fs.existsSync(imagePath)) {
         const imageBuffer = fs.readFileSync(imagePath);
-        const ext = path.extname(imagePath).replace('.', '').toLowerCase();
-        const mimeType = ext === 'png' ? 'image/png' : 'image/jpeg';
+        const ext = path.extname(imagePath).toLowerCase();
+        const mimeType = MIME_TYPES[ext] || 'image/jpeg';
         const base64Data = imageBuffer.toString('base64');
         imageStyle = `url('data:${mimeType};base64,${base64Data}')`;
     } else {
-        console.warn('Warning: Image file not found at', imagePath);
+        console.warn('Warning: Image file not found for', data.imagePath || 'assets/cover');
     }
 } catch (e) {
     console.error('Error processing image:', e);
 }
 
-const Card = ({ title, artist, url }) => {
+// Подбираем размер шрифта в px, чтобы текст помещался без обрезки
+function fitFontSize(text = '', { maxPx, minPx, comfortableChars, shrinkFactor = 0.85 }) {
+    const cleanText = String(text).trim();
+    if (cleanText.length <= comfortableChars) {
+        return maxPx;
+    }
+    const ratio = comfortableChars / cleanText.length;
+    const calculated = Math.round(maxPx * Math.pow(ratio, shrinkFactor));
+    return Math.max(minPx, Math.min(maxPx, calculated));
+}
+
+const Card = ({ title = '', artist = '', url = '#' }) => {
+    const titleFontSize = fitFontSize(title, {
+        maxPx: 24,
+        minPx: 12,
+        comfortableChars: 11,
+        shrinkFactor: 0.75
+    });
+
+    const artistFontSize = fitFontSize(artist, {
+        maxPx: 14,
+        minPx: 9,
+        comfortableChars: 18,
+        shrinkFactor: 0.7
+    });
+
     return `
         <svg fill="none" width="362" height="165" viewBox="0 0 362 165" xmlns="http://www.w3.org/2000/svg">
             <foreignObject width="100%" height="100%">
@@ -63,11 +136,12 @@ const Card = ({ title, artist, url }) => {
                         .card-body {
                             display: flex;
                             color: #121212;
-                            padding: 0 20px 0 18px;
+                            padding: 0 16px 0 16px;
                             flex-direction: column;
                             justify-content: center;
                             background-color: #ffffff;
                             flex: 1;
+                            min-width: 0;
                             overflow: hidden;
                         }
 
@@ -75,7 +149,7 @@ const Card = ({ title, artist, url }) => {
                             width: fit-content;
                             color: #0d1117;
                             padding: 5px 10px;
-                            font-size: 0.8rem;
+                            font-size: 12px;
                             line-height: 1.1;
                             background-color: #00cf74;
                             margin: 0 0 10px 0;
@@ -84,26 +158,22 @@ const Card = ({ title, artist, url }) => {
 
                         .title-track {
                             max-width: 100%;
-                            font-size: 1.55rem;
+                            font-size: ${titleFontSize}px;
                             line-height: 1.15;
-                            overflow: hidden;
                             font-weight: bolder;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
                             font-family: Arial Black, sans-serif;
                             margin: 0 0 6px 0;
                             color: #121212;
+                            overflow-wrap: anywhere;
                         }
 
                         .artist-track {
                             max-width: 100%;
                             color: #666666;
-                            font-size: 0.85rem;
+                            font-size: ${artistFontSize}px;
                             line-height: 1.2;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
                             margin: 0;
+                            overflow-wrap: anywhere;
                         }
                     </style>
 
