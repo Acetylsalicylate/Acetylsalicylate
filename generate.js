@@ -88,7 +88,7 @@ function fitFontSize(text = '', { maxPx, minPx, comfortableChars, shrinkFactor =
 const Card = ({ title = '', artist = '', url = '#' }) => {
     const titleFontSize = fitFontSize(title, {
         maxPx: 24,
-        minPx: 12,
+        minPx: 10,
         comfortableChars: 11,
         shrinkFactor: 0.75
     });
