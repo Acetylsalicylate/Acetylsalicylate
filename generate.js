@@ -89,8 +89,8 @@ const Card = ({ title = '', artist = '', url = '#' }) => {
     const titleFontSize = fitFontSize(title, {
         maxPx: 24,
         minPx: 10,
-        comfortableChars: 11,
-        shrinkFactor: 0.75
+        comfortableChars: 9,
+        shrinkFactor: 0.7
     });
 
     const artistFontSize = fitFontSize(artist, {
