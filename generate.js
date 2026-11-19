@@ -29,7 +29,7 @@ try {
 
 const Card = ({ title, artist, url }) => {
     return `
-        <svg fill="none" width="362" height="140" viewBox="0 0 362 140" xmlns="http://www.w3.org/2000/svg">
+        <svg fill="none" width="362" height="165" viewBox="0 0 362 165" xmlns="http://www.w3.org/2000/svg">
             <foreignObject width="100%" height="100%">
                 <div xmlns="http://www.w3.org/1999/xhtml">
                     <style>
@@ -43,7 +43,7 @@ const Card = ({ title, artist, url }) => {
                             display: flex;
                             align-items: center;
                             width: 362px;
-                            height: 140px;
+                            height: 165px;
                             text-decoration: none;
                             background-color: #ffffff;
                             border-radius: 6px;
