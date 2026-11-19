@@ -10,7 +10,6 @@ if (!fs.existsSync(dataPath)) {
 
 const data = require(dataPath);
 
-// Читаем локальную картинку и конвертируем в Base64
 let imageStyle = "url('')";
 try {
     const imagePath = path.join(__dirname, data.imagePath || 'assets/cover.jpg');
@@ -51,10 +50,10 @@ const Card = ({ title, artist, url }) => {
                         }
 
                         .album-image {
-                            width: 126px;
-                            height: 126px;
-                            margin-left: 6px;
-                            border-radius: 5px;
+                            width: 149px;
+                            height: 149px;
+                            margin-left: 8px;
+                            border-radius: 6px;
                             background-size: cover;
                             background-position: center;
                             background-image: ${imageStyle};
@@ -64,7 +63,7 @@ const Card = ({ title, artist, url }) => {
                         .card-body {
                             display: flex;
                             color: #121212;
-                            padding: 0 20px;
+                            padding: 0 20px 0 18px;
                             flex-direction: column;
                             justify-content: center;
                             background-color: #ffffff;
@@ -75,29 +74,32 @@ const Card = ({ title, artist, url }) => {
                         .recently-played-title {
                             width: fit-content;
                             color: #0d1117;
-                            padding: 4px 8px;
-                            font-size: 0.7rem;
+                            padding: 5px 10px;
+                            font-size: 0.8rem;
+                            line-height: 1.1;
                             background-color: #00cf74;
-                            margin: 0 0 8px 0;
+                            margin: 0 0 10px 0;
                             border-radius: 4px;
                         }
 
                         .title-track {
                             max-width: 100%;
-                            font-size: 1.3rem;
+                            font-size: 1.55rem;
+                            line-height: 1.15;
                             overflow: hidden;
                             font-weight: bolder;
                             white-space: nowrap;
                             text-overflow: ellipsis;
                             font-family: Arial Black, sans-serif;
-                            margin: 0 0 4px 0;
+                            margin: 0 0 6px 0;
                             color: #121212;
                         }
 
                         .artist-track {
                             max-width: 100%;
                             color: #666666;
-                            font-size: 0.7rem;
+                            font-size: 0.85rem;
+                            line-height: 1.2;
                             overflow: hidden;
                             white-space: nowrap;
                             text-overflow: ellipsis;
@@ -127,4 +129,4 @@ const Card = ({ title, artist, url }) => {
 
 const svgContent = Card(data);
 fs.writeFileSync(path.join(__dirname, 'card.svg'), svgContent.trim());
-console.log('card.svg generated successfully with rounded image corners!');
+console.log('card.svg generated successfully!');
